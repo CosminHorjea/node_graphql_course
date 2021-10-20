@@ -1,17 +1,19 @@
 const jwt = require('jsonwebtoken');
-const { MY_SECRET_KEY } = require("./config");
+const MY_SECRET_KEY = require("./config");
 
 const authMiddleware = (req, res, next) => {
   const authorization = req.headers.authorization;
   if (authorization) {
-    console.log(authorization);
-    const isValid = jwt.verify(authorization.replace('Bearer ', ''), MY_SECRET_KEY);
-    if (isValid) {
+    try {
+      console.log("Auth: " + MY_SECRET_KEY);
+      const token = authorization.split(" ")[1];
+      const decoded = jwt.verify(token, MY_SECRET_KEY);
       next();
-    } else {
-      res.status(403).send("Sorry");
+    } catch (err) {
+      res.status(401).json({
+        message: "Invalid token"
+      });
     }
   }
-  next();
 };
 exports.authMiddleware = authMiddleware;
