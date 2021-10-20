@@ -1,0 +1,3 @@
+const MY_SECRET_KEY = 'SECRETDISCRET_VELEA2010';
+
+module.exports = MY_SECRET_KEY;
