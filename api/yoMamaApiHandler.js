@@ -1,4 +1,4 @@
-const fetch = require("node-fetch")
+const fetch = require('node-fetch')
 
 const yoMamaApiHandler = async (req, res) => {
   const response = await fetch("https://yomomma-api.herokuapp.com/jokes")
